@@ -4,19 +4,34 @@ Reporting Course Performance to Students
 import pandas as pd
 import matplotlib.pyplot as plt
 import numpy as np
-# for Excel file
-course_data2 = pd.read_excel('course1.xlsx', sheet_name='course1')
-#print(course_data2)
+
+
 course_data = pd.read_csv("course.csv")
-print(course_data)
-class student:
+#print(course_data)
+def course_activities():
+
+class students:
 
     def __init__(self, data):
-        self.name = data["Name"]
-        self.status = data["Name"]
-        self.speed = data["Name"]
-        self.fuel = data["Name"]
-        self.direction = data["Name"]
+        self.df = data.iloc[:, 2:]
+    def student_grades(self):
+        # Iterate through each row in the DataFrame
+        for index, row in self.df.iterrows():
+            print(index)
+            print(row)
+            # Get the name and marks for the student
+            name = row["Name"]
+            reports = row["Reports"]
+            hw = row["HW"]
+            midterm = row["Midterm"]
+            practical = row["Practical"]
+            final = row["Final"]
+            total_grade = row["Total Grade"]
+            std_grades=[name,reports,hw,midterm,practical,final,total_grade]
+            course_activities(std_grades)
 
 
-student(course_data)
+
+
+
+students(course_data)
