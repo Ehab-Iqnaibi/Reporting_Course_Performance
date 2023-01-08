@@ -74,15 +74,19 @@ for i, row in df.iterrows():
     student_marks = row
 
     # Check if any of the marks is null
-    if student_marks.isnull().any():
+  #  if student_marks.isnull().any():
         # Print the name of the student and the name of the column that is null
-        print(f"{student_name}: {student_marks.name[student_marks.isnull()]} is null")
+       # print(f"{student_name}: {student_marks.name[student_marks.isnull()]} is null")
 
     # Print the student name and marks
     print(student_name)
     print(student_marks)
     print(student_marks.loc["Total Grade"])
     print(student_marks.iloc[2])
+
+    print(df.columns)
+    column=df.columns.tolist()
+    print(column[2])
 
 
 
