@@ -10,15 +10,13 @@ import numpy as np
 course_data = pd.read_csv("course.csv")
 #print(course_data)
 
-
 class students:
 
     def __init__(self, data):
-        self.df = data
+        self.course_df = data.iloc[:, 3:]
     def get_student_grades(self,std_grade,pdf):
-        #print(std_name)
-        column = str(self.df.columns.tolist())
-        #print(std_grade)
+        column = str(self.course_df.columns.tolist())
+        print("colums is"+column)
         pdf.add_page()
         pdf.set_font('Times', size=18)
         pdf.cell(40, 10, txt=" Student grades of the course activities", border=0,align='C')
@@ -41,6 +39,19 @@ class students:
         pdf.cell(40, 10, txt=str(std_grade[4]), border=1)
         pdf.cell(40, 10, txt=str(std_grade[5]), border=1)
 
+    #A pie chart showing the weights of course activities
+    def get_pie_chart(self,w):
+        labels= self.course_df.columns.tolist()
+        course_weight=np.array(w)
+        print(labels)
+        print(type(labels))
+        print(course_weight)
+        fig, ax = plt.subplots()
+
+        ax.pie(course_weight[0:5], radius=1, labels= labels[0:5], autopct='%1.1f%%', wedgeprops=dict(width=1, edgecolor='white'))
+        ax.set_title('weights of course activities ' )
+        plt.show()
+
     def get_pdf_cover_page(self,name):
         # save FPDF() class into variable pdf
         pdf = FPDF()
@@ -48,7 +59,7 @@ class students:
         pdf.add_page()
         # set style and size font
         pdf.set_font("Arial", size=24)
-        # creat text
+        # add text
         pdf.cell(40, 10, 'Palestine Polytechnic University',border =  0,ln = 1)
         pdf.cell(40, 10, 'Reporting Course Performance',border =  0,ln = 1)
         pdf.set_font('Times', size=18)
@@ -62,25 +73,27 @@ std=students(course_data)
 # Iterate through each row in the DataFrame
 df = course_data.set_index('Name')
 df = df.iloc[:, 2:]
+#print(df)
 index=0
 for i, row in df.iterrows():
+    # Get the name and marks for the student
     student_name = i
     student_marks = row
-    # Get the name and marks for the student
-    #name = row["Name"]
     reports = row["Reports"]
     hw = row["HW"]
+    #print(type(hw))
     midterm = row["Midterm"]
     practical = row["Practical"]
     final = row["Final"]
     total_grade = row["Total Grade"]
     std_grades = [reports, hw, midterm, practical, final, total_grade]
     if index == 0:
-        weight_lis = std_grades
+        weight_lis =std_grades
         #print(weight_lis)
     else:
         std_pdf = std.get_pdf_cover_page(student_name)
         std.get_student_grades(std_grades,std_pdf)
+        std.get_pie_chart(weight_lis)
 
 
     index = index+1

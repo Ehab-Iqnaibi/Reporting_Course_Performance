@@ -61,7 +61,7 @@ print(std_names)
                 weight_lis=std_grades
             else:
             self.course_activities(std_grades)
-'''
+
 
 #marks_df = pd.read_excel("Marks\Class1_Marks.xlsx")
 df = pd.read_csv("course.csv")
@@ -87,7 +87,20 @@ for i, row in df.iterrows():
     print(df.columns)
     column=df.columns.tolist()
     print(column[2])
-
+ '''
+# A pie chart
+import matplotlib.pyplot as plt
+import numpy as np
+labels = ['Eng', 'IT', 'CAS', 'Sci', 'Med', 'CAP']
+student_count = np.array( [[280, 170], [250, 270],
+[210, 290], [130, 150], [145, 165], [500, 350]] )
+aggregated_student_count = student_count.sum(axis=1)
+print(aggregated_student_count)
+flattened_student_count = student_count.flatten()
+fig, ax = plt.subplots()
+ax.pie(aggregated_student_count, radius=1, labels= labels)
+ax.set_title('University Student Distribution per College')
+plt.show()
 
 
 
