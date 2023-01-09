@@ -87,7 +87,7 @@ for i, row in df.iterrows():
     print(df.columns)
     column=df.columns.tolist()
     print(column[2])
- '''
+
 # A pie chart
 import matplotlib.pyplot as plt
 import numpy as np
@@ -102,7 +102,95 @@ ax.pie(aggregated_student_count, radius=1, labels= labels)
 ax.set_title('University Student Distribution per College')
 plt.show()
 
+# Open the image and get its width and height
+img = Image.open('logo.png')
+img_width, img_height = img.size
+
+# Get the width and height of the page
+page_width, page_height = pdf.w, pdf.h
+
+# Calculate the x and y coordinates needed to center the image
+x = (page_width - img_width) / 2
+y = (page_height - img_height) / 2
+
+# Add the image to the PDF document
+pdf.image('logo.png', x=x, y=y, w=10, h=0.5, type='PNG')
+ '''
+#pdf
+#from PIL import Image
+from fpdf import FPDF
+ll=['a','b']
+gg=list(range(4))
+# save FPDF() class into variable pdf
+pdf = FPDF(format='letter')
+#add a page pdf
+pdf.add_page()
+
+#set style and size font
+pdf.set_font("Arial",size=24)
 
 
+pdf.cell(60)
+pdf.cell(75 ,10," ",0,2,'C')
+pdf.cell(75, 10, 'Palestine Polytechnic University',  0, 6,'C')
+pdf.cell(75, 10, 'Reporting Course Performance',border =  0,ln = 1)
+#pdf.cell(90,10,'',0,4,'C')
+pdf.set_font('Times', size=16)
+pdf.cell(70, 10, txt='Name: Ehab Iqnaibi',border =  0, ln =1, align='C')
+#pdf.cell(20 ,0,txt="Ehab Iqnaibi",border=0,ln=2,align="C")
 
 
+pdf.add_page()
+pdf.cell(60)
+pdf.cell(75,10,'Ehab Iqnaibi',0,2,'C')
+pdf.cell(90,10,'',0,2,'C')
+for l in ll:
+    pdf.cell(35, 10, l, 1, 0, 'C')
+#pdf.cell(35, 10, "llllll", 1, 1, 'C')
+pdf.set_font("Arial",'B',size=11)
+for g in gg:
+    pdf.cell(60)
+    pdf.cell(35, 10, str(g), 1, 0, 'C')
+    pdf.cell(35, 10, str(g**2), 1, 1, 'C')
+pdf.cell(90, 10, "gggggggggg", 0, 2, 'C')
+pdf.cell(55, 10, "image", 0, 0, 'C')
+#save our pdf
+pdf.output("test4.pdf")
+
+
+'''
+        pdf.cell(40, 10, txt="Reports", border=1)
+        pdf.cell(40, 10, txt="HW", border=1)
+        pdf.cell(40, 10, txt= column[2], border=1)
+        pdf.cell(40, 10, txt="Practical", border=1)
+        pdf.cell(40, 10, txt=column[4], border=1)
+        pdf.cell(40, 10, txt="Total Grade", border=1)
+        # Move the cursor to the next row
+        pdf.ln()
+        # Create the data cells
+        pdf.cell(40, 10, txt=str(std_grade[0]), border=1)
+        pdf.cell(40, 10, txt=str(std_grade[1]), border=1)
+        pdf.cell(40, 10, txt=str(std_grade[2]), border=1)
+        pdf.cell(40, 10, txt=str(std_grade[3]), border=1)
+        pdf.cell(40, 10, txt=str(std_grade[4]), border=1)
+        pdf.cell(40, 10, txt=str(std_grade[5]), border=1)
+        
+        pdf.cell(35,10,'')
+        pdf.cell(75, 10, " Student grades of the course activities", 0, 2, 'C')
+        pdf.set_font('Times', size=12)
+        pdf.cell(20, 10, '', 0, 0, 'C')
+        # Create the header cells
+        table_head=['Rubric','Grade']
+        for h in table_head:
+            if h=='Rubric':
+                pdf.cell(35, 10, h, 1, 0, 'C')
+            else:
+                pdf.cell(35, 10, h, 1, 1, 'C')
+
+        # Create the data cells
+        for i in range(6):
+            #pdf.cell(60)
+            pdf.cell(55, 10, '', 0, 0, 'C')
+            pdf.cell(35, 10, column[i], 1, 0, 'C')
+            pdf.cell(35, 10,str(std_grade[i]) , 1, 1, 'C')
+        '''
