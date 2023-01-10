@@ -193,4 +193,13 @@ pdf.output("test4.pdf")
             pdf.cell(55, 10, '', 0, 0, 'C')
             pdf.cell(35, 10, column[i], 1, 0, 'C')
             pdf.cell(35, 10,str(std_grade[i]) , 1, 1, 'C')
-        '''
+       # =====================    
+    reports = row["Reports"]
+    hw = row["HW"]
+    #print(type(hw))
+    midterm = row["Midterm"]
+    practical = row["Practical"]
+    final = row["Final"]
+    total_grade = row["Total Grade"]
+    std_grades = [reports, hw, midterm, practical, final, total_grade]
+    '''
