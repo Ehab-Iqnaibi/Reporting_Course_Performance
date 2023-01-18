@@ -7,8 +7,8 @@ import matplotlib.pyplot as plt
 import numpy as np
 import math
 
-course_data = pd.read_csv("course.csv")
-
+#course_data = pd.read_csv("course.csv")
+course_data = pd.read_excel('course1.xlsx')
 class students:
 
     def __init__(self, Rubric):
@@ -76,13 +76,17 @@ class students:
         pdf.set_font('Times', "", size=28)
         pdf.set_xy(40, 200)
         pdf.cell(40, 20, 'Good Luck '+self.std_name, 0, 1, 'C')
-        if index == user:
+        if user0 == 1:
             pdf.output('Reporting_Course_Performance_' + self.std_name + ".pdf", 'F')
+        elif user0 == 2:
+            if index == user:
+                pdf.output('Reporting_Course_Performance_' + self.std_name + ".pdf", 'F')
 
     #A pie chart showing the weights of course activities
     def pie_chart(self):
         fig1, ax1 = plt.subplots()
-        ax1.pie(self.rubric_weight[0:5], radius=1, labels= self.rubric[0:5], autopct='%1.1f%%', wedgeprops=dict(width=1, edgecolor='white'))
+        l=len(self.rubric_weight)-1
+        ax1.pie(self.rubric_weight[0:l], radius=1, labels= self.rubric[0:l], autopct='%1.1f%%', wedgeprops=dict(width=1, edgecolor='white'))
         ax1.set_title('weights of course activities ' )
         plt.savefig('weights_of_course_activities.png')
 
@@ -153,8 +157,12 @@ df = df.iloc[:, 2:]
 column = course_data.iloc[:, 3:].columns.tolist()
 std = students(column)
 index=0
-print(course_data['Name'].iloc[1:])
-user=int(input('Enter the student number for which you want to create a pdf file: '))
+user0=int(input('Do you want to create a pdf file for 1.All student OR 2. A specific student: '))
+if user0 == 1:
+    pass
+elif user0 == 2:
+    print(course_data['Name'].iloc[1:])
+    user = int(input('Enter the student number for which you want to create a pdf file: '))
 
 for i, row in df.iterrows():
     # Get the name and marks for the student

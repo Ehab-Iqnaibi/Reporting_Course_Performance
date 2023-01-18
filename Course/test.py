@@ -115,7 +115,7 @@ y = (page_height - img_height) / 2
 
 # Add the image to the PDF document
 pdf.image('logo.png', x=x, y=y, w=10, h=0.5, type='PNG')
- '''
+
 #pdf
 #from PIL import Image
 from fpdf import FPDF
@@ -158,7 +158,7 @@ pdf.cell(55, 10, "image", 0, 0, 'C')
 pdf.output("test4.pdf")
 
 
-'''
+
         pdf.cell(40, 10, txt="Reports", border=1)
         pdf.cell(40, 10, txt="HW", border=1)
         pdf.cell(40, 10, txt= column[2], border=1)
@@ -203,3 +203,5 @@ pdf.output("test4.pdf")
     total_grade = row["Total Grade"]
     std_grades = [reports, hw, midterm, practical, final, total_grade]
     '''
+course_data2 = pd.read_excel('course1.xlsx')
+print(course_data2)
