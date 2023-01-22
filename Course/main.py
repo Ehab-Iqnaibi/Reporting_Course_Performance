@@ -13,7 +13,7 @@ import numpy as np
 import math
 
 #course_data = pd.read_csv("course.csv")
-course_data = pd.read_excel('course1.xlsx')
+course_data = pd.read_excel('course.xlsx')
 class students:
 
     def __init__(self, rubric):
